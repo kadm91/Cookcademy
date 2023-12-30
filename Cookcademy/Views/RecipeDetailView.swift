@@ -80,7 +80,7 @@ extension RecipeDetailView {
             ForEach (directions) { direction in
                 let index =  recipe.directions.firstIndex {$0 == direction} ?? 0
                 HStack {
-                    Text("\(index + 1). ")
+                    Text("\(index + 1). ").bold()
                     Text("\(direction.isOptional ? "(Optional) " : "")"
                          + "\(direction.description)")
                 }
