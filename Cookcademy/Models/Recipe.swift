@@ -50,7 +50,8 @@ struct MainInformation {
     }
 }
 
-struct Ingredient {
+struct Ingredient: Identifiable {
+    let id = UUID()
     var name: String
     var quantity: Double
     var unit: Unit
@@ -84,7 +85,9 @@ struct Ingredient {
     }
 
 
-struct Direction {
+struct Direction: Identifiable, Equatable {
+    
+    let id = UUID()
     var description: String
     var isOptional: Bool
 }
