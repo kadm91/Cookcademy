@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct CookcademyApp: App {
+    
+    @State var recipeData = RecipeData()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RecipesListView()
+                .environment(recipeData)
         }
     }
 }
