@@ -17,9 +17,13 @@ struct RecipesListView: View {
             ForEach(recipes) { recipe in
                 NavigationLink(value: recipe) {
                     Text(recipe.mainInformation.name)
+                        
                 }
+                .listRowBackground(Color.cusumBackground)
             }
         }
+        
+        .foregroundStyle(Color.customForeground)
         .navigationDestination(for: Recipe.self) { recipe in
             RecipeDetailView(recipe: recipe )
         }
