@@ -18,6 +18,7 @@ struct RecipeDetailView: View {
             
             List {
                 ingredientsSection
+                directionSection
             }
          
             
@@ -67,7 +68,18 @@ extension RecipeDetailView {
         }
     }
     
-    
+    var directionSection: some View {
+        Section("Directions") {
+            ForEach (directions) { direction in
+                let index =  recipe.directions.firstIndex {$0 == direction} ?? 0
+                HStack {
+                    Text("\(index + 1). ")
+                    Text("\(direction.isOptional ? "(Optional) " : "")"
+                                       + "\(direction.description)")
+                }
+            }
+        }
+    }
 
  
 }
