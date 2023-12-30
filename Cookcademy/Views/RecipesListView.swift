@@ -15,8 +15,13 @@ struct RecipesListView: View {
     var body: some View {
         List {
             ForEach(recipes) { recipe in
-                Text(recipe.mainInformation.name)
+                NavigationLink(value: recipe) {
+                    Text(recipe.mainInformation.name)
+                }
             }
+        }
+        .navigationDestination(for: Recipe.self) { recipe in
+            RecipeDetailView(recipe: recipe )
         }
         .navigationTitle(navigationTitle)
     }
