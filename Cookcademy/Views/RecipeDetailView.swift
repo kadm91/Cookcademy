@@ -13,14 +13,21 @@ struct RecipeDetailView: View {
     
     var body: some View {
         VStack {
-           author
-           description
+            author
+            description
             
             List {
-                ingredientsSection
-                directionSection
+                Group {
+                    
+                    ingredientsSection
+                    directionSection
+                }
+                .listRowBackground(Color.cusumBackground)
+                .foregroundStyle(Color.customForeground)
+                
             }
-         
+            
+            
             
             
             
@@ -75,13 +82,13 @@ extension RecipeDetailView {
                 HStack {
                     Text("\(index + 1). ")
                     Text("\(direction.isOptional ? "(Optional) " : "")"
-                                       + "\(direction.description)")
+                         + "\(direction.description)")
                 }
             }
         }
     }
-
- 
+    
+    
 }
 
 //MARK: - Preview
