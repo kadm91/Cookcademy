@@ -16,6 +16,9 @@ struct RecipeDetailView: View {
            author
            description
             
+            List {
+                ingredientsSection
+            }
          
             
             
@@ -51,6 +54,20 @@ extension RecipeDetailView {
     var title: String {
         recipe.mainInformation.name
     }
+    
+    var ingredients: [Ingredient] {recipe.ingredients }
+    
+    var directions: [Direction] { recipe.directions}
+    
+    var ingredientsSection: some View {
+        Section("Ingredients") {
+            ForEach(ingredients) { ingredient in
+                Text(ingredient.description)
+            }
+        }
+    }
+    
+    
 
  
 }
