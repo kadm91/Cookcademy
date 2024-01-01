@@ -10,7 +10,7 @@ import SwiftUI
 struct RecipesListView: View {
     
     @Environment(RecipeData.self) var recipeDataVM
-    
+    let category: MainInformation.Category
     
     var body: some View {
         List {
@@ -36,17 +36,19 @@ struct RecipesListView: View {
 
 extension RecipesListView {
     
-    var recipes: [Recipe] { recipeDataVM.recipes }
+    var recipes: [Recipe] { recipeDataVM.recipes(for: category) }
 
     // navigation title could be add in a constant extructure
-    var navigationTitle: String { "All Recipes" }
+    var navigationTitle: String { "\(category.rawValue) Recipes" }
+    
+  
 }
 
 //MARK: - preview
 
 #Preview {
     NavigationStack {
-        RecipesListView()
+        RecipesListView(category: .breakfast)
             .environment(RecipeData())
     }
 }

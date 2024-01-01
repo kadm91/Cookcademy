@@ -14,7 +14,7 @@ struct CookcademyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            RecipesListView()
+            RecipeCategoryGridView()
                 .environment(recipeData)
         }
     }
