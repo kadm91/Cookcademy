@@ -12,15 +12,22 @@ struct RecipeCategoryGridView: View {
     @Environment(RecipeData.self) var RecipeDataMV
     
     var body: some View {
-       NavigationView {
+       NavigationStack {
            ScrollView {
                LazyVGrid(columns: layout ) {
                ForEach(MainInformation.Category.allCases,id: \.self) { category in
-                   CategoryView(category: category)
+                   NavigationLink(value: category) {
+                       CategoryView(category: category)
+                   }
                }
              }
-               .navigationTitle(title)
            }
+           .navigationTitle(title)
+           .navigationDestination(for: MainInformation.Category.self) { category in
+               RecipesListView(category: category)
+                   .environment(RecipeDataMV)
+           }
+           
        }
      }
    }
