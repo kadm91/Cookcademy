@@ -49,7 +49,7 @@ struct RecipesListView: View {
                             
                             if newRecipe.isValid {
                                 Button("Add") {
-                                    recipeDataVM.recipes.append(newRecipe)
+                                    recipeDataVM.add(recipe: newRecipe)
                                     isPresenting.toggle()
                                 }
                             }

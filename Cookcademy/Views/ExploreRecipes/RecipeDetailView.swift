@@ -27,11 +27,6 @@ struct RecipeDetailView: View {
                 
             }
             
-            
-            
-            
-            
-            
         }
         .navigationTitle(title)
     }
