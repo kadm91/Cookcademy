@@ -14,6 +14,10 @@ struct Recipe: Identifiable, Equatable, Hashable {
     var ingredients: [Ingredient]
     var directions: [Direction]
     
+    var isValid: Bool {
+        mainInformation.isValid && !ingredients.isEmpty && !directions.isEmpty
+    }
+    
     
     init(mainInformation: MainInformation, ingredients: [Ingredient], directions: [Direction]) {
         self.mainInformation = mainInformation
@@ -43,6 +47,10 @@ struct MainInformation: Identifiable, Equatable, Hashable {
     var description: String
     var author: String
     var category: Category
+    
+    var isValid: Bool {
+        !name.isEmpty && !description.isEmpty && !author.isEmpty
+    }
     
     enum Category: String, CaseIterable, Hashable {
         case breakfast = "Breakfast"
