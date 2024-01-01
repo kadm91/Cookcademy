@@ -35,6 +35,7 @@ struct ModifyRecipeView: View {
                 )
             ]
         }
+        .tint(Color.customForeground)
     }
 }
 
