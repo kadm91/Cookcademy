@@ -13,13 +13,14 @@ struct RecipeCategoryGridView: View {
     
     var body: some View {
        NavigationView {
-         LazyVGrid(columns: [GridItem()]) {
-           ForEach(MainInformation.Category.allCases,
-                   id: \.self) { category in
-               Text(category.rawValue).font(.title)
+           ScrollView {
+               LazyVGrid(columns: layout ) {
+               ForEach(MainInformation.Category.allCases,id: \.self) { category in
+                   CategoryView(category: category)
+               }
+             }
+               .navigationTitle(title)
            }
-         }
-         .navigationTitle(title)
        }
      }
    }
@@ -28,7 +29,11 @@ struct RecipeCategoryGridView: View {
  
 extension RecipeCategoryGridView {
     var title: String { "Category" }
+    private var layout: [GridItem] { [GridItem(), GridItem()] }
 }
+
+
+
 
 //MARK: - Preview
 
@@ -36,3 +41,6 @@ extension RecipeCategoryGridView {
     RecipeCategoryGridView()
         .environment(RecipeData())
 }
+
+
+
