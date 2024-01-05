@@ -63,6 +63,8 @@ struct MainInformation: Identifiable, Equatable, Hashable {
 }
 
 struct Ingredient: Identifiable, Equatable, Hashable {
+    
+    
     let id = UUID()
     var name: String
     var quantity: Double
@@ -95,6 +97,20 @@ struct Ingredient: Identifiable, Equatable, Hashable {
             var singularName: String {String(rawValue.dropLast())}
             var id: Self { self }
         }
+    
+    
+    init(name: String, quantity: Double, unit: Unit) {
+        self.name = name
+        self.quantity = quantity
+        self.unit = unit
+    }
+    
+    init() {
+        self.init(name: "", quantity: 1.0, unit: .none)
+    }
+    
+    
+    
     }
 
 

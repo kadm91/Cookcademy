@@ -9,14 +9,20 @@ import SwiftUI
 
 struct ModifyIngredientView: View {
     
-    @State var ingredient: Ingredient
+    @Environment (\.dismiss) var dismiss
+    
+    @Binding var ingredient: Ingredient
+    let createAction: ((Ingredient) -> Void)
     
     var body: some View {
         Form {
             ingredientNameField
             quantityField
             unitField
+            saveBtn
         }
+        .navigationTitle("Add Ingredient")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
@@ -69,12 +75,35 @@ extension ModifyIngredientView {
         .tint(.customForeground)
 
     }
+    
+    var saveBtn: some View {
+        Section {
+            Button {
+                createAction(ingredient)
+                dismiss()
+            } label: {
+                 Text("Save")
+                    .font(.title3)
+                    .frame(maxWidth: .infinity)
+                    .frame(maxHeight: .infinity)
+                    .bold()
+            }
+            .listRowBackground(Color.clear)
+            .tint(.accent)
+            .buttonStyle(.bordered)
+         
+            
+        }
+    }
 }
 
 //MARK: - Preview
 
 #Preview {
-    ModifyIngredientView(ingredient: Recipe.testRecipes[0].ingredients[0])
+    NavigationStack {
+        ModifyIngredientView(
+            ingredient: .constant(Ingredient())) { print($0) }
+    }
 }
 
 

@@ -53,7 +53,7 @@ extension ModifyRecipeView {
             ModifyMainInformationView(mainInformation: $recipe.mainInformation)
             
         case .ingredients:
-            Text("Ingredients Selection")
+            ModifyIngredientsView(ingredients: $recipe.ingredients)
             
         case .directions:
             Text("Directions Section")
@@ -73,5 +73,7 @@ extension ModifyRecipeView {
 //MARK: - Preview
 
 #Preview {
-    ModifyRecipeView(recipe: .constant(Recipe.testRecipes[0]))
+    NavigationStack {
+        ModifyRecipeView(recipe: .constant(Recipe.testRecipes[0]))
+    }
 }
