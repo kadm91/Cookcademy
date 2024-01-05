@@ -84,7 +84,7 @@ struct Ingredient: Identifiable, Equatable, Hashable {
     }
         
         
-        enum Unit: String, CaseIterable {
+        enum Unit: String, CaseIterable, Identifiable {
             case oz = "Ounces"
             case g = "Grams"
             case cups = "Cups"
@@ -93,6 +93,7 @@ struct Ingredient: Identifiable, Equatable, Hashable {
             case none = "No units"
             
             var singularName: String {String(rawValue.dropLast())}
+            var id: Self { self }
         }
     }
 
