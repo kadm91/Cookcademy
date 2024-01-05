@@ -38,7 +38,7 @@ extension RecipeDetailView {
     
     var author: some View {
         HStack {
-            Text("Author \(recipe.mainInformation.author)")
+            Text("Author: \(recipe.mainInformation.author)")
                 .font(.subheadline)
                 .padding()
             Spacer()

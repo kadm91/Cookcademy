@@ -20,7 +20,7 @@ struct CategoryView: View {
             Text(category.rawValue)
                 .font(.title)
                 .bold()
-                .foregroundStyle(.blue)
+                .foregroundStyle(.accent)
         }
     }
 }

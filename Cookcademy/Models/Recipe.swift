@@ -52,11 +52,13 @@ struct MainInformation: Identifiable, Equatable, Hashable {
         !name.isEmpty && !description.isEmpty && !author.isEmpty
     }
     
-    enum Category: String, CaseIterable, Hashable {
+    enum Category: String, CaseIterable, Hashable, Identifiable {
         case breakfast = "Breakfast"
         case lunch = "Lunch"
         case dinner = "Dinner"
         case dessert = "Dessert"
+        
+        var id: Self {self}
     }
 }
 
