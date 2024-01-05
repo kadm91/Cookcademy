@@ -27,12 +27,6 @@ struct ModifyRecipeView: View {
     }
 }
 
-//MARK: - Preview
-
-#Preview {
-    ModifyRecipeView(recipe: .constant(Recipe.testRecipes[0]))
-}
-
 //MARK: - extension
 
 extension ModifyRecipeView {
@@ -41,22 +35,30 @@ extension ModifyRecipeView {
         Picker("Selection", selection: $selection) {
             ForEach(Selection.allCases) {
                 Text($0.rawValue.capitalized)
+                    
             }
+            
         }
+        
         .pickerStyle(.segmented)
         .padding()
     }
     
-    func returnSelectionForm(from selection: Selection ) -> some View {
+    
+    @ViewBuilder func returnSelectionForm(from selection: Selection ) -> some View {
+        
         switch selection {
             
         case .main:
-            return Text("Main Selection")
+            ModifyMainInformationView(mainInformation: $recipe.mainInformation)
+            
         case .ingredients:
-            return Text("Ingredients Selection")
+            Text("Ingredients Selection")
+            
         case .directions:
-            return Text("Directions Section")
+            Text("Directions Section")
         }
+        
     }
     
     
@@ -65,4 +67,11 @@ extension ModifyRecipeView {
         var id: Self { self }
     }
     
+}
+
+
+//MARK: - Preview
+
+#Preview {
+    ModifyRecipeView(recipe: .constant(Recipe.testRecipes[0]))
 }

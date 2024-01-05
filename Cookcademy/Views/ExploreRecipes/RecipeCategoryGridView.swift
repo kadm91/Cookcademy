@@ -11,6 +11,8 @@ struct RecipeCategoryGridView: View {
     
     @Environment(RecipeData.self) var RecipeDataMV
     
+  
+    
     var body: some View {
        NavigationStack {
            ScrollView {
@@ -30,6 +32,17 @@ struct RecipeCategoryGridView: View {
            
        }
      }
+    
+    //MARK: - Init for styling
+    init() {
+        UISegmentedControl.appearance().selectedSegmentTintColor = .customForeground
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.cusumBackground], for: .selected)
+        UISegmentedControl.appearance().backgroundColor = .cusumBackground
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.customForeground], for: .normal)
+        
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.customForeground]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.customForeground]
+    }
    }
 
 //MARK: - RecipeCategoryGridView Extension
