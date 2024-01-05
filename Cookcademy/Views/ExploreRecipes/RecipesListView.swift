@@ -56,6 +56,7 @@ struct RecipesListView: View {
                         }
                     }
                     .navigationTitle("Add a New Recipe")
+                    .navigationBarTitleDisplayMode(.inline)
             }
         }
         .foregroundStyle(Color.customForeground)
