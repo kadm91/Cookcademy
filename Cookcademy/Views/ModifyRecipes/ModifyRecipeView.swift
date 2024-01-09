@@ -53,10 +53,10 @@ extension ModifyRecipeView {
             ModifyMainInformationView(mainInformation: $recipe.mainInformation)
             
         case .ingredients:
-            ModifyIngredientsView(ingredients: $recipe.ingredients)
+            ModifyComponentsView<Ingredient, ModifyIngredientView> (components: $recipe.ingredients)
             
         case .directions:
-            Text("Directions Section")
+            ModifyComponentsView<Direction, ModifyDirectionView>(components: $recipe.directions)
         }
         
     }

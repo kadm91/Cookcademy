@@ -62,7 +62,7 @@ struct MainInformation: Identifiable, Equatable, Hashable {
     }
 }
 
-struct Ingredient: Identifiable, Equatable, Hashable {
+struct Ingredient: Identifiable, Equatable, Hashable, RecipeComponent {
     
     
     let id = UUID()
@@ -114,7 +114,7 @@ struct Ingredient: Identifiable, Equatable, Hashable {
     }
 
 
-struct Direction: Identifiable, Equatable, Hashable {
+struct Direction: Identifiable, Equatable, Hashable, RecipeComponent {
     
     let id = UUID()
     var description: String

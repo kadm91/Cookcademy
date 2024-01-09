@@ -7,12 +7,18 @@
 
 import SwiftUI
 
-struct ModifyIngredientView: View {
+struct ModifyIngredientView: ModifyComponentView {
     
     @Environment (\.dismiss) var dismiss
     
     @Binding var ingredient: Ingredient
     let createAction: ((Ingredient) -> Void)
+    
+    
+    init(component: Binding<Ingredient>, createAction: @escaping (Ingredient) -> Void) {
+        self._ingredient = component
+        self.createAction = createAction
+    }
     
     var body: some View {
         Form {
@@ -91,8 +97,6 @@ extension ModifyIngredientView {
             .listRowBackground(Color.clear)
             .tint(.accent)
             .buttonStyle(.bordered)
-         
-            
         }
     }
 }
@@ -102,7 +106,7 @@ extension ModifyIngredientView {
 #Preview {
     NavigationStack {
         ModifyIngredientView(
-            ingredient: .constant(Ingredient())) { print($0) }
+            component: .constant(Ingredient())) { print($0) }
     }
 }
 
