@@ -7,13 +7,17 @@
 
 import SwiftUI
 
-struct ModifyDirectionView: View {
+struct ModifyDirectionView: ModifyComponentView {
     
     @Environment (\.dismiss) var dismiss
     
     @Binding var direction: Direction
     let createAction: ((Direction) -> Void)
     
+    init(component: Binding<Direction>, createAction: @escaping (Direction) -> Void) {
+        self._direction = component
+        self.createAction = createAction
+    }
     
     var body: some View {
         Form {
@@ -70,5 +74,5 @@ extension ModifyDirectionView {
 //MARK: - Preview
 
 #Preview {
-    ModifyDirectionView(direction: .constant(Direction())) { print($0) }
+    ModifyDirectionView(component: .constant(Direction())) { print($0) }
 }
