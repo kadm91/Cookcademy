@@ -11,8 +11,6 @@ struct RecipeCategoryGridView: View {
     
     @Environment(RecipeData.self) var RecipeDataMV
     
-  
-    
     var body: some View {
        NavigationStack {
            ScrollView {
