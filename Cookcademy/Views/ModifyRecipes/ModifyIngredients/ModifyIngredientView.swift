@@ -107,10 +107,5 @@ extension ModifyIngredientView {
 }
 
 
-extension NumberFormatter {
-    static var decimal: NumberFormatter {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        return formatter
-    }
-}
+
+

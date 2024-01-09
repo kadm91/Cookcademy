@@ -119,6 +119,15 @@ struct Direction: Identifiable, Equatable, Hashable {
     let id = UUID()
     var description: String
     var isOptional: Bool
+    
+    init(description: String, isOptional: Bool) {
+        self.description = description
+        self.isOptional = isOptional
+    }
+    
+    init() {
+        self.init(description: "", isOptional: false)
+    }
 }
 
 
