@@ -61,20 +61,17 @@ extension ModifyIngredientsView {
     
     var ingredientList: some View {
         List {
-            
-            
-           
+
             Group {
-                ForEach (ingredients) { ingredient in
-                        Text(ingredient.description)
-                }
-           
-            
+                
+            ForEach (ingredients) { Text($0.description) }
+              
             NavigationLink {
                 ModifyIngredientView(ingredient: $newIngredient) { ingredient in
                     ingredients.append(ingredient)
                     newIngredient = Ingredient()
                 }
+                
             } label: {
                 Label(
                     title: { Text("Add another Ingredient") },
@@ -85,9 +82,7 @@ extension ModifyIngredientsView {
             }
             .listRowBackground(Color.cusumBackground)
             .foregroundStyle(.accent)
-
         }
-       
     }
 }
 

@@ -42,6 +42,7 @@ struct RecipeCategoryGridView: View {
         
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.customForeground]
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.customForeground]
+        
     }
    }
 
