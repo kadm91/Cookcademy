@@ -10,12 +10,16 @@ import SwiftUI
 struct RecipesListView: View {
     
     @Environment(RecipeData.self) var recipeDataVM
+    
     let category: MainInformation.Category
     
     @State private var isPresenting = false
     @State private var newRecipe = Recipe()
     
     var body: some View {
+        
+        
+        
         List {
             ForEach(recipes) { recipe in
                 NavigationLink(value: recipe) {
@@ -61,7 +65,7 @@ struct RecipesListView: View {
         }
         .foregroundStyle(Color.customForeground)
         .navigationDestination(for: Recipe.self) { recipe in
-            RecipeDetailView(recipe: recipe )
+            RecipeDetailView(recipe: binding(for: recipe) )
         }
         .navigationTitle(navigationTitle)
     }
@@ -77,6 +81,15 @@ extension RecipesListView {
     // navigation title could be add in a constant extructure
     var navigationTitle: String { "\(category.rawValue) Recipes" }
     
+    func binding(for recipe: Recipe) -> Binding<Recipe> {
+        
+        @Bindable var vm = recipeDataVM
+        
+        guard let index = recipeDataVM.index(of: recipe) else {
+            fatalError("Recipe not found")
+        }
+        return $vm.recipes[index]
+    }
   
 }
 

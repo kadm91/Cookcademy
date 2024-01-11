@@ -9,7 +9,8 @@ import SwiftUI
 
 struct RecipeDetailView: View {
     
-    let recipe: Recipe
+   @Binding var recipe: Recipe
+   @State var isPresenting = false
     
     var body: some View {
         VStack {
@@ -29,6 +30,21 @@ struct RecipeDetailView: View {
             
         }
         .navigationTitle(title)
+        .toolbar {
+            ToolbarItem {
+                Button("Edit") { isPresenting.toggle() }
+            }
+        }
+        .sheet(isPresented: $isPresenting) {
+            NavigationView {
+                ModifyRecipeView(recipe: $recipe)
+                    .toolbar {
+                        ToolbarItem (placement: .confirmationAction) {
+                            Button("Save") { isPresenting.toggle() }
+                        }
+                    }
+            }
+        }
     }
 }
 
@@ -37,10 +53,18 @@ struct RecipeDetailView: View {
 extension RecipeDetailView {
     
     var author: some View {
+        
         HStack {
-            Text("Author: \(recipe.mainInformation.author)")
+            Group{
+                Text("Author:")
+                    .padding(.horizontal)
+                    .bold()
+                Text(recipe.mainInformation.author)
+            }
+                .padding(.top)
                 .font(.subheadline)
-                .padding()
+                .foregroundStyle(.accent)
+                
             Spacer()
         }
     }
@@ -48,6 +72,7 @@ extension RecipeDetailView {
     var description: some View {
         HStack {
             Text(recipe.mainInformation.description)
+                .foregroundStyle(.accent)
                 .font(.subheadline)
                 .padding()
             Spacer()
@@ -63,15 +88,25 @@ extension RecipeDetailView {
     var directions: [Direction] { recipe.directions}
     
     var ingredientsSection: some View {
-        Section("Ingredients") {
+        Section {
             ForEach(ingredients) { ingredient in
                 Text(ingredient.description)
             }
+        } header: {
+            HStack {
+                Spacer()
+                Text("Ingredients")
+                   .font(.title3)
+                   .bold()
+               .underline()
+                Spacer()
+            }
+            .padding(.bottom, 5)
         }
     }
     
     var directionSection: some View {
-        Section("Directions") {
+        Section {
             ForEach (directions) { direction in
                 let index =  recipe.directions.firstIndex {$0 == direction} ?? 0
                 HStack {
@@ -80,6 +115,17 @@ extension RecipeDetailView {
                          + "\(direction.description)")
                 }
             }
+        } header: {
+            HStack {
+                Spacer()
+                Text("Directions")
+                   .font(.title3)
+                   .bold()
+               .underline()
+                Spacer()
+            }
+            .padding(.bottom, 5)
+               
         }
     }
     
@@ -90,6 +136,6 @@ extension RecipeDetailView {
 
 #Preview {
     NavigationStack {
-        RecipeDetailView(recipe: Recipe.testRecipes[0])
+        RecipeDetailView(recipe: .constant(Recipe.testRecipes[0]))
     }
 }
