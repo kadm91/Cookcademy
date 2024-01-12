@@ -27,8 +27,8 @@ struct ModifyIngredientView: ModifyComponentView {
             unitField
             saveBtn
         }
-        .navigationTitle("Add Ingredient")
-        .navigationBarTitleDisplayMode(.inline)
+        
+    
     }
 }
 

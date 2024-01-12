@@ -17,7 +17,7 @@ protocol ModifyComponentView: View {
 
 import SwiftUI
 
-struct ModifyComponentsView<Component: RecipeComponent, DestinationView: ModifyComponentView>: View where DestinationView.Component == Component  {
+struct ModifyComponentsView<Component: RecipeComponent, DestinationView: ModifyComponentView>: View where DestinationView.Component == Component, DestinationView.Component: Hashable  {
     
     @Binding var components: [Component]
     @State var newComponent = Component()
@@ -60,7 +60,7 @@ extension ModifyComponentsView {
                     components.append(component)
                     newComponent = Component()
                 }
-                
+                .navigationTitle("Add \(labelComponent.capitalized)")
                 
                 
             } label: {
@@ -81,12 +81,18 @@ extension ModifyComponentsView {
         .foregroundStyle(.accent)
     }
     
-    var ingredientList: some View {
+   var ingredientList: some View {
+        
         List {
 
             Group {
                 
-                ForEach (components) { Text($0.description) }
+                ForEach (components) { component in
+                    NavigationLink(value: component) {
+                        Text(component.description)
+                    }
+
+                }
               
             NavigationLink {
                
@@ -94,6 +100,7 @@ extension ModifyComponentsView {
                     components.append(component)
                     newComponent = Component()
                 }
+                .navigationTitle("Add \(labelComponent.capitalized)")
                 
             } label: {
                 Label(
@@ -106,6 +113,23 @@ extension ModifyComponentsView {
             .listRowBackground(Color.cusumBackground)
             .foregroundStyle(.accent)
         }
+        .navigationDestination(for: Component.self) { component in
+            DestinationView(component: binding(for: component)) { _ in
+                return
+            }
+            .navigationTitle("Edit \(labelComponent.capitalized)")
+        }
+    }
+    
+    
+    
+    
+    func binding(for component: Component) -> Binding<Component> {
+        
+        guard let index = components.firstIndex(of: component) else {
+            fatalError("Recipe not found")
+        }
+        return $components[index]
     }
 }
 
