@@ -167,7 +167,7 @@ extension ModifyComponentsView {
     
     func binding(for component: Component) -> Binding<Component> {
         
-        guard let index = components.firstIndex(of: component) else {
+        guard let index = components.firstIndex(where: {component.id == $0.id}) else {
             fatalError("Recipe not found")
         }
         return $components[index]

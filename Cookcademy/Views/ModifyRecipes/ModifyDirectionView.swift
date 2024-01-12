@@ -56,7 +56,8 @@ extension ModifyDirectionView {
         
         Section {
             Button {
-                
+                createAction(direction)
+                dismiss()
             } label: {
                 Text("Save")
                     .font(.title3)

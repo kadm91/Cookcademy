@@ -44,6 +44,7 @@ struct RecipesListView: View {
                     .toolbar {
                         ToolbarItem(placement: .cancellationAction) {
                             Button("Dismiss") {
+                                newRecipe = Recipe()
                                 isPresenting.toggle()
                             }
                         }
@@ -54,6 +55,7 @@ struct RecipesListView: View {
                             if newRecipe.isValid {
                                 Button("Add") {
                                     recipeDataVM.add(recipe: newRecipe)
+                                    newRecipe = Recipe()
                                     isPresenting.toggle()
                                 }
                             }

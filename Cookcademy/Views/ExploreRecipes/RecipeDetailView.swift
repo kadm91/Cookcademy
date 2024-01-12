@@ -11,6 +11,7 @@ struct RecipeDetailView: View {
     
    @Binding var recipe: Recipe
    @State private var isPresenting = false
+   
     
     var body: some View {
         VStack {
@@ -41,6 +42,12 @@ struct RecipeDetailView: View {
                     .toolbar {
                         ToolbarItem (placement: .confirmationAction) {
                             Button("Save") { isPresenting.toggle() }
+                        }
+                        
+                        ToolbarItem (placement: .cancellationAction) {
+                            Button ("Dismiss") {
+                                isPresenting.toggle()
+                            }
                         }
                     }
                     .navigationTitle("Edit Recipe")

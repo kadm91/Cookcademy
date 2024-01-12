@@ -15,7 +15,9 @@ struct Recipe: Identifiable, Equatable, Hashable {
     var directions: [Direction]
     
     var isValid: Bool {
-        mainInformation.isValid && !ingredients.isEmpty && !directions.isEmpty
+        mainInformation.isValid
+        // I think just the nam of the recipe is necesary in order to save a recipe
+        //&& !ingredients.isEmpty && !directions.isEmpty
     }
     
     
@@ -49,7 +51,8 @@ struct MainInformation: Identifiable, Equatable, Hashable {
     var category: Category
     
     var isValid: Bool {
-        !name.isEmpty && !description.isEmpty && !author.isEmpty
+        !name.isEmpty 
+        //&& !description.isEmpty && !author.isEmpty
     }
     
     enum Category: String, CaseIterable, Hashable, Identifiable {
