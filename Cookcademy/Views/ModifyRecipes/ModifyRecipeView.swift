@@ -14,14 +14,15 @@ struct ModifyRecipeView: View {
 
     var body: some View {
         
-        
-        VStack {
-            selectionView
-            returnSelectionForm(from: selection)
-            
-            Spacer()
-            
-        }
+       
+            VStack {
+                selectionView
+                returnSelectionForm(from: selection)
+                
+                Spacer()
+                
+            }
+            .ignoresSafeArea(edges: .bottom)
         
 
     }

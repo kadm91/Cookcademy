@@ -36,15 +36,19 @@ struct RecipeDetailView: View {
             }
         }
         .sheet(isPresented: $isPresenting) {
-            NavigationView {
+            NavigationStack {
                 ModifyRecipeView(recipe: $recipe)
                     .toolbar {
                         ToolbarItem (placement: .confirmationAction) {
                             Button("Save") { isPresenting.toggle() }
                         }
                     }
+                    .navigationTitle("Edit Recipe")
+                    .navigationBarTitleDisplayMode(.inline)
             }
+            
         }
+        
     }
 }
 
