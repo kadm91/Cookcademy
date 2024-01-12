@@ -54,26 +54,22 @@ extension ModifyDirectionView {
     
     var saveBtn: some View {
         
-        Section {
-            Button {
-                createAction(direction)
-                dismiss()
-            } label: {
-                Text("Save")
-                    .font(.title3)
-                    .frame(maxWidth: .infinity)
-                    .frame(maxHeight: .infinity)
-                    .bold()
-            }
-            .tint(.accent)
-            .buttonStyle(.bordered)
-            .listRowBackground(Color.clear)
+        ComponentSaveBtn {
+            createAction(direction)
+            dismiss()
         }
+        .disabled(direction.description == "" ? true : false)
+        .foregroundStyle(direction.description == "" ? .gray : .accent)
+        .tint(direction.description == "" ? .gray : .accent)
     }
 }
 
 //MARK: - Preview
 
-#Preview {
+#Preview ("New Direction") {
     ModifyDirectionView(component: .constant(Direction())) { print($0) }
+}
+
+#Preview ("Edit Direction") {
+    ModifyDirectionView(component: .constant(Recipe.testRecipes[1].directions[1])) { print($0) }
 }

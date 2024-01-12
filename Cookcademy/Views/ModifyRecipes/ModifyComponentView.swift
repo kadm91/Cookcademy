@@ -61,6 +61,7 @@ extension ModifyComponentsView {
                 DestinationView(component: $newComponent) { component in
                     components.append(component)
                     newComponent = Component()
+                    
                 }
                 .navigationTitle("Add \(labelComponent.capitalized)")
                 
@@ -84,35 +85,36 @@ extension ModifyComponentsView {
     }
     
    var ingredientList: some View {
-        
-       VStack {
+       Group {
+     
            
            LabeledContent {
                // Using edit button give a funky animation everytime we move and delete a component solve this by using editMode enviroment
                Button {
-                       withAnimation {
-                           editMode = editMode == .inactive ? .active : .inactive
-                       }
+                   withAnimation {
+                       editMode = editMode == .inactive ? .active : .inactive
+                   }
                } label: {
                    withAnimation {
                        Text(editMode == .inactive ? "Edit" : "Done")
                    }
                }
-           
+               
            } label: {
                Text(labelComponent + "s")
                    .font(.title2)
                    .bold()
            }
-         
+           
            .underline()
            .foregroundStyle(.accent)
            .padding()
-
+       
+      
            
     
            List {
-
+               
                 Group {
                     
                     ForEach (components) { component in
@@ -160,6 +162,8 @@ extension ModifyComponentsView {
                 .navigationTitle("Edit \(labelComponent.capitalized)")
         }
       }
+       
+       
     }
     
     
