@@ -82,31 +82,34 @@ extension ModifyIngredientView {
 
     }
     
+   // make saveBtn a utility View to replace here and in the ModifyDirectionView, will do it with generics since componets comform to the same protocol
+    
     var saveBtn: some View {
-        Section {
-            Button {
-                createAction(ingredient)
-                dismiss()
-            } label: {
-                 Text("Save")
-                    .font(.title3)
-                    .frame(maxWidth: .infinity)
-                    .frame(maxHeight: .infinity)
-                    .bold()
-            }
-            .listRowBackground(Color.clear)
-            .tint(.accent)
-            .buttonStyle(.bordered)
+        
+        ComponentSaveBtn {
+            createAction(ingredient)
+            dismiss()
         }
+        .disabled(ingredient.name == "" ? true : false)
+        .foregroundStyle(ingredient.name == "" ? .gray : .accent)
+        .tint(ingredient.name == "" ? .gray : .accent)
+        
     }
 }
 
 //MARK: - Preview
 
-#Preview {
+#Preview ("New Ingredient") {
     NavigationStack {
         ModifyIngredientView(
             component: .constant(Ingredient())) { print($0) }
+    }
+}
+
+#Preview ("Edit Ingredient") {
+    NavigationStack {
+        ModifyIngredientView(
+            component: .constant(Recipe.testRecipes[0].ingredients[0])) { print($0) }
     }
 }
 
