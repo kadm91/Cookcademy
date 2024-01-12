@@ -10,7 +10,7 @@ import SwiftUI
 struct RecipeDetailView: View {
     
    @Binding var recipe: Recipe
-   @State var isPresenting = false
+   @State private var isPresenting = false
     
     var body: some View {
         VStack {
