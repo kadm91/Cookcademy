@@ -20,7 +20,9 @@ import SwiftUI
 struct ModifyComponentsView<Component: RecipeComponent, DestinationView: ModifyComponentView>: View where DestinationView.Component == Component, DestinationView.Component: Hashable  {
     
     @Binding var components: [Component]
-    @State var newComponent = Component()
+    @State private var newComponent = Component()
+    @State private var editMode: EditMode = .inactive
+    
     private var labelComponent: String {
         if Component() is Ingredient {
             return "Ingredient"
@@ -83,42 +85,81 @@ extension ModifyComponentsView {
     
    var ingredientList: some View {
         
-        List {
+       VStack {
+           
+           LabeledContent {
+               // Using edit button give a funky animation everytime we move and delete a component solve this by using editMode enviroment
+               Button {
+                       withAnimation {
+                           editMode = editMode == .inactive ? .active : .inactive
+                       }
+               } label: {
+                   withAnimation {
+                       Text(editMode == .inactive ? "Edit" : "Done")
+                   }
+               }
+           
+           } label: {
+               Text(labelComponent + "s")
+                   .font(.title2)
+                   .bold()
+           }
+         
+           .underline()
+           .foregroundStyle(.accent)
+           .padding()
 
-            Group {
-                
-                ForEach (components) { component in
-                    NavigationLink(value: component) {
-                        Text(component.description)
+           
+    
+           List {
+
+                Group {
+                    
+                    ForEach (components) { component in
+                        NavigationLink(value: component) {
+                            Text(component.description)
+                        }
+
                     }
-
+                    .onDelete{components.remove(atOffsets: $0)}
+                    .onMove(perform: { indices, newOffset in
+                        withAnimation {
+                            components.move(fromOffsets: indices, toOffset: newOffset)
+                        }
+                       
+                    })
+                  
+                NavigationLink {
+                   
+                    DestinationView(component: $newComponent) { component in
+                        components.append(component)
+                        newComponent = Component()
+                    }
+                    .navigationTitle("Add \(labelComponent.capitalized)")
+                    
+                } label: {
+                    Label(
+                        title: { Text("Add another \(labelComponent.lowercased())") },
+                        icon: { Image(systemName: "plus.circle.fill") }
+                    )
                 }
-              
-            NavigationLink {
-               
-                DestinationView(component: $newComponent) { component in
-                    components.append(component)
-                    newComponent = Component()
-                }
-                .navigationTitle("Add \(labelComponent.capitalized)")
                 
-            } label: {
-                Label(
-                    title: { Text("Add another \(labelComponent.lowercased())") },
-                    icon: { Image(systemName: "plus.circle.fill") }
-                )
+                }
+                .listRowBackground(Color.cusumBackground)
+                .foregroundStyle(.accent)
             }
-            
-            }
-            .listRowBackground(Color.cusumBackground)
-            .foregroundStyle(.accent)
+           .environment(\.editMode, $editMode)
+          
+      
+           
+           
+            .navigationDestination(for: Component.self) { component in
+                DestinationView(component: binding(for: component)) { _ in
+                    return
+                }
+                .navigationTitle("Edit \(labelComponent.capitalized)")
         }
-        .navigationDestination(for: Component.self) { component in
-            DestinationView(component: binding(for: component)) { _ in
-                return
-            }
-            .navigationTitle("Edit \(labelComponent.capitalized)")
-        }
+      }
     }
     
     
