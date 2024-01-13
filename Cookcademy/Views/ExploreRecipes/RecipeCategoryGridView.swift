@@ -22,6 +22,7 @@ struct RecipeCategoryGridView: View {
                }
              }
            }
+           .padding(.horizontal, 5)
            .navigationTitle(title)
            .navigationDestination(for: MainInformation.Category.self) { category in
                RecipesListView(category: category)
@@ -38,11 +39,12 @@ struct RecipeCategoryGridView: View {
         UISegmentedControl.appearance().backgroundColor = .cusumBackground
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.customForeground], for: .normal)
         
+        
         UIStepper.appearance().backgroundColor = .cusumBackground
         UIStepper.appearance().setDecrementImage(UIImage(systemName: "minus")?.withTintColor(.accent), for: .normal)
         UIStepper.appearance().setIncrementImage(UIImage(systemName: "plus")?.withTintColor(.accent), for: .normal)
         
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.customForeground]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.customForeground, .font: UIFont(name: "Georgia-Bold", size: 30) as Any]
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.customForeground]
         
         

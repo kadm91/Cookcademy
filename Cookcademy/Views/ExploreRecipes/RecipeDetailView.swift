@@ -15,9 +15,10 @@ struct RecipeDetailView: View {
     
     var body: some View {
         VStack {
-            author
-            description
             
+                    author
+                    description
+       
             List {
                 Group {
                     
@@ -33,7 +34,11 @@ struct RecipeDetailView: View {
         .navigationTitle(title)
         .toolbar {
             ToolbarItem {
-                Button("Edit") { isPresenting.toggle() }
+              editBtn
+            }
+            
+            ToolbarItem {
+             favorityBtn
             }
         }
         .sheet(isPresented: $isPresenting) {
@@ -88,6 +93,28 @@ extension RecipeDetailView {
                 .padding()
             Spacer()
         }
+    }
+    
+    var editBtn: some View {
+        Button { isPresenting.toggle() } label: {
+            Text("Edit").bold().font(.headline)
+        }
+    }
+    
+    var favorityBtn: some View {
+        
+        Button {
+            withAnimation {
+              recipe.isFavorite.toggle()
+            }
+         
+        } label: {
+            Image(systemName: recipe.isFavorite ? "star.fill" : "star")
+                .font(.headline).bold()
+        }
+        .tint(.yellow)
+        
+        
     }
     
     var title: String {

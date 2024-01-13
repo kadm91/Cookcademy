@@ -16,15 +16,24 @@ struct CategoryView: View {
             Image(category.rawValue)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .opacity(0.35)
+                .opacity(0.25)
+                .background(.thinMaterial)
+               
             Text(category.rawValue)
-                .font(.title)
-                .bold()
+                .font(.title2)
+                .underline()
+                .fontWeight(.heavy)
                 .foregroundStyle(.accent)
+                
         }
+        .clipShape(RoundedRectangle(cornerRadius: 25.0))
+        .overlay(RoundedRectangle(cornerRadius: 25.0).strokeBorder(.customForeground, lineWidth: 2))
+        
+        
     }
 }
 
 #Preview {
     CategoryView(category: MainInformation.Category.dessert)
+        .padding()
 }

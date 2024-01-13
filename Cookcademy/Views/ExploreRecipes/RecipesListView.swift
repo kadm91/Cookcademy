@@ -23,7 +23,18 @@ struct RecipesListView: View {
         List {
             ForEach(recipes) { recipe in
                 NavigationLink(value: recipe) {
-                    Text(recipe.mainInformation.name)
+                    HStack {
+                        Text(recipe.mainInformation.name)
+                        Spacer()
+                        if recipe.isFavorite {
+                            Image(systemName: "star.fill")
+                                .foregroundStyle(Color.yellow)
+                                .padding(.trailing, 10)
+                        }
+                        
+                    }
+                  
+                    
                         
                 }
                 .listRowBackground(Color.cusumBackground)
