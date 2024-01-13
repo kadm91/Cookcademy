@@ -14,10 +14,15 @@ struct MainTabView: View {
       TabView {
         RecipeCategoryGridView()
           .tabItem { Label("Recipes", systemImage: "list.dash") }
-        NavigationStack {
+        
+          NavigationStack {
             RecipesListView(viewStyle: .favorites)
         }.tabItem { Label("Favorites", systemImage: "heart.fill") }
+          
+          SettingsView()
+              .tabItem { Label("Settings", systemImage: "gear")  }
       }
+        
     }
 }
 
