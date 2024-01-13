@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0007D5B82B479F510047763D /* ModifyMainInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0007D5B72B479F510047763D /* ModifyMainInformationView.swift */; };
 		0008DBED2B52608E0082180D /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0008DBEC2B52608E0082180D /* MainTabView.swift */; };
+		002AF7AC2B535A0000584BCF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002AF7AB2B535A0000584BCF /* SettingsView.swift */; };
 		00664DAD2B47BE1800C6E4AE /* ModifyIngredientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00664DAC2B47BE1800C6E4AE /* ModifyIngredientView.swift */; };
 		00664DAF2B47C83D00C6E4AE /* ModifyComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00664DAE2B47C83D00C6E4AE /* ModifyComponentView.swift */; };
 		0072C16E2B4CE7D3003A2BEA /* ModifyDirectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072C16D2B4CE7D3003A2BEA /* ModifyDirectionView.swift */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		0007D5B72B479F510047763D /* ModifyMainInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyMainInformationView.swift; sourceTree = "<group>"; };
 		0008DBEC2B52608E0082180D /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		002AF7AB2B535A0000584BCF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		00664DAC2B47BE1800C6E4AE /* ModifyIngredientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyIngredientView.swift; sourceTree = "<group>"; };
 		00664DAE2B47C83D00C6E4AE /* ModifyComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyComponentView.swift; sourceTree = "<group>"; };
 		0072C16D2B4CE7D3003A2BEA /* ModifyDirectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyDirectionView.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				0008DBEC2B52608E0082180D /* MainTabView.swift */,
+				002AF7AB2B535A0000584BCF /* SettingsView.swift */,
 				007832362B42753D00537876 /* ExploreRecipes */,
 				007832372B42755D00537876 /* ModifyRecipes */,
 			);
@@ -221,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				002AF7AC2B535A0000584BCF /* SettingsView.swift in Sources */,
 				007BEE3F2B3E48370092A470 /* Recipe.swift in Sources */,
 				0078321A2B4238D600537876 /* CategoryView.swift in Sources */,
 				00E5DBB52B3FF1D500D499B6 /* RecipeDetailView.swift in Sources */,
