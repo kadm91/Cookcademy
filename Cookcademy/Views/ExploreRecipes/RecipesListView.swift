@@ -11,14 +11,12 @@ struct RecipesListView: View {
     
     @Environment(RecipeData.self) var recipeDataVM
     
-    let category: MainInformation.Category
+    let viewStyle: ViewStyle
     
     @State private var isPresenting = false
     @State private var newRecipe = Recipe()
     
     var body: some View {
-        
-        
         
         List {
             ForEach(recipes) { recipe in
@@ -44,6 +42,7 @@ struct RecipesListView: View {
             ToolbarItem (placement: .topBarTrailing) {
                 Button ("Add New Recipe", systemImage: "plus") {
                     isPresenting.toggle()
+                    newRecipe = Recipe()
                 }
                 .tint(Color.customForeground)
             }
@@ -55,7 +54,7 @@ struct RecipesListView: View {
                     .toolbar {
                         ToolbarItem(placement: .cancellationAction) {
                             Button("Dismiss") {
-                                newRecipe = Recipe()
+                            
                                 isPresenting.toggle()
                             }
                         }
@@ -64,9 +63,12 @@ struct RecipesListView: View {
                             
                             
                             if newRecipe.isValid {
+                            
                                 Button("Add") {
+                                    if case .favorites = viewStyle {
+                                        newRecipe.isFavorite = true
+                                    }
                                     recipeDataVM.add(recipe: newRecipe)
-                                    newRecipe = Recipe()
                                     isPresenting.toggle()
                                 }
                             }
@@ -89,10 +91,34 @@ struct RecipesListView: View {
 
 extension RecipesListView {
     
-    var recipes: [Recipe] { recipeDataVM.recipes(for: category) }
+    var recipes: [Recipe] {
+        
+        switch viewStyle {
+            
+        case .favorites: return recipeDataVM.favoriteRecipes
+ 
+        case let .singleCategory(category):
+            return recipeDataVM.recipes(for: category)
+        
+        }
+        
+      
+        
+    }
 
     // navigation title could be add in a constant extructure
-    var navigationTitle: String { "\(category.rawValue) Recipes" }
+    var navigationTitle: String { 
+        switch viewStyle {
+            
+        case .favorites:
+            return "Favorite Recipes"
+        case let .singleCategory(category):
+          return  "\(category.rawValue) Recipes"
+        }
+        
+        
+       
+    }
     
     func binding(for recipe: Recipe) -> Binding<Recipe> {
         
@@ -104,13 +130,25 @@ extension RecipesListView {
         return $vm.recipes[index]
     }
   
+    
+    enum ViewStyle {
+        case favorites
+        case singleCategory(MainInformation.Category)
+    }
 }
 
 //MARK: - preview
 
-#Preview {
+#Preview ("Category Preview") {
     NavigationStack {
-        RecipesListView(category: .breakfast)
+        RecipesListView(viewStyle: .singleCategory(.breakfast))
+            .environment(RecipeData())
+    }
+}
+
+#Preview ("Favorite List Preview") {
+    NavigationStack {
+        RecipesListView(viewStyle: .favorites)
             .environment(RecipeData())
     }
 }

@@ -25,7 +25,7 @@ struct RecipeCategoryGridView: View {
            .padding(.horizontal, 5)
            .navigationTitle(title)
            .navigationDestination(for: MainInformation.Category.self) { category in
-               RecipesListView(category: category)
+               RecipesListView(viewStyle: .singleCategory(category))
                    .environment(RecipeDataMV)
            }
            
