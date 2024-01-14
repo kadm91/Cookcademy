@@ -18,4 +18,10 @@ struct CookcademyApp: App {
                 .environment(recipeData)
         }
     }
+    
+
+    
+    
+    
+    
 }
