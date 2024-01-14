@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ModifyMainInformationView: View {
     
+    @AppStorage ("mainColor")private var mainColor = Color.accentColor
+    
     @Binding var mainInformation: MainInformation
     
     var body: some View {
@@ -19,6 +21,7 @@ struct ModifyMainInformationView: View {
             descriptionSection
             category
         }
+        .tint(mainColor)
     }
 }
 
@@ -37,8 +40,8 @@ extension ModifyMainInformationView {
             Text("\(title):")
                 .bold()
         }
-        .listRowBackground(Color.cusumBackground)
-        .foregroundStyle(Color.customForeground)
+        //.listRowBackground(Color.cusumBackground)
+        .foregroundStyle(mainColor)
     }
     
     var descriptionSection: some View {
@@ -50,8 +53,8 @@ extension ModifyMainInformationView {
                 .font(.subheadline)
                 .bold()
         }
-        .listRowBackground(Color.cusumBackground)
-        .foregroundStyle(Color.customForeground)
+        //.listRowBackground(Color.cusumBackground)
+        .foregroundStyle(mainColor)
     }
     
     var category: some View {
@@ -66,9 +69,9 @@ extension ModifyMainInformationView {
             Text("Category")
                 .bold()
         }
-        .listRowBackground(Color.cusumBackground)
-        .tint(Color.customForeground)
-        .foregroundStyle(Color.customForeground)
+       // .listRowBackground(Color.cusumBackground)
+        .tint(mainColor)
+        .foregroundStyle(mainColor)
         .pickerStyle(.menu)
 
     }

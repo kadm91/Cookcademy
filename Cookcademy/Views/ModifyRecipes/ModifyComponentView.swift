@@ -19,6 +19,8 @@ import SwiftUI
 
 struct ModifyComponentsView<Component: RecipeComponent, DestinationView: ModifyComponentView>: View where DestinationView.Component == Component, DestinationView.Component: Hashable  {
     
+
+    
     @Binding var components: [Component]
     @State private var newComponent = Component()
     @State private var editMode: EditMode = .inactive
@@ -37,7 +39,7 @@ struct ModifyComponentsView<Component: RecipeComponent, DestinationView: ModifyC
             if components.isEmpty {
                 emptyView
             } else {
-                ingredientList
+                componentList
             }
         }
         }
@@ -54,6 +56,8 @@ extension ModifyComponentsView {
         }, description: {
             Text("New \(labelComponent.lowercased() + "s") you add will appear here.")
         }, actions: {
+            
+
             
             NavigationLink {
                 
@@ -73,18 +77,17 @@ extension ModifyComponentsView {
                                 "plus.circle").font(.title3) }
                 )
             }
-            .frame(width: 200, height: 35)
-            .background(RoundedRectangle(cornerRadius: 25.0 ).foregroundStyle(.cusumBackground))
-            
+            .buttonStyle(.bordered)
+
         }
         
         
         )
         
-        .foregroundStyle(.accent)
+      
     }
     
-   var ingredientList: some View {
+   var componentList: some View {
        Group {
      
            
@@ -103,11 +106,11 @@ extension ModifyComponentsView {
            } label: {
                Text(labelComponent + "s")
                    .font(.title2)
+                  
                    .bold()
            }
            
            .underline()
-           .foregroundStyle(.accent)
            .padding()
        
       
@@ -147,8 +150,8 @@ extension ModifyComponentsView {
                 }
                 
                 }
-                .listRowBackground(Color.cusumBackground)
-                .foregroundStyle(.accent)
+              //  .listRowBackground(Color.cusumBackground)
+                
             }
            .environment(\.editMode, $editMode)
           

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ModifyIngredientView: ModifyComponentView {
     
+    @AppStorage ("mainColor")private var mainColor = Color.accentColor
+    
     @Environment (\.dismiss) var dismiss
     
     @Binding var ingredient: Ingredient
@@ -27,6 +29,8 @@ struct ModifyIngredientView: ModifyComponentView {
             unitField
             saveBtn
         }
+            .tint(mainColor)
+            
         
     
     }
@@ -47,7 +51,7 @@ extension ModifyIngredientView {
                
                 .bold()
         }
-        .foregroundStyle(.customForeground)
+       .foregroundStyle(mainColor)
 
     }
     
@@ -64,7 +68,7 @@ extension ModifyIngredientView {
                     .padding(.trailing)
                     .bold()
             }
-            .foregroundStyle(.customForeground)
+            .foregroundStyle(mainColor)
         }
     }
     
@@ -75,10 +79,10 @@ extension ModifyIngredientView {
             }
         } label: {
             Text("Unit:")
-                .foregroundStyle(.customForeground)
+                .foregroundStyle(mainColor)
                 .bold()
         }
-        .tint(.customForeground)
+        .tint(mainColor)
 
     }
     
@@ -91,8 +95,8 @@ extension ModifyIngredientView {
             dismiss()
         }
         .disabled(ingredient.name == "" ? true : false)
-        .foregroundStyle(ingredient.name == "" ? .gray : .accent)
-        .tint(ingredient.name == "" ? .gray : .accent)
+        .foregroundStyle(ingredient.name == "" ? .gray : mainColor)
+        .tint(ingredient.name == "" ? .gray : mainColor)
         
     }
 }

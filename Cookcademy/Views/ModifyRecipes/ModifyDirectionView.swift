@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ModifyDirectionView: ModifyComponentView {
+    @AppStorage ("mainColor")private var mainColor = Color.accentColor
     
     @Environment (\.dismiss) var dismiss
     
@@ -25,6 +26,7 @@ struct ModifyDirectionView: ModifyComponentView {
             optionalField
             saveBtn
         }
+        .tint(mainColor)
     }
 }
 
@@ -39,17 +41,17 @@ extension ModifyDirectionView {
         } label: {
             Text("Direction:").bold()
         }
-        .foregroundStyle(.customForeground)
-        .listRowBackground(Color.cusumBackground)
+        .foregroundStyle(Color.accentColor)
+       // .listRowBackground(Color.cusumBackground)
     }
     
     var optionalField: some View {
         Toggle(isOn: $direction.isOptional) {
             Text("Optional").bold()
         }
-        .tint(.accent)
-        .foregroundStyle(.accent)
-        .listRowBackground(Color.cusumBackground)
+        .tint(Color.accentColor)
+        .foregroundStyle(Color.accentColor)
+        // .listRowBackground(Color.cusumBackground)
     }
     
     var saveBtn: some View {
@@ -59,8 +61,8 @@ extension ModifyDirectionView {
             dismiss()
         }
         .disabled(direction.description == "" ? true : false)
-        .foregroundStyle(direction.description == "" ? .gray : .accent)
-        .tint(direction.description == "" ? .gray : .accent)
+        .foregroundStyle(direction.description == "" ? .gray : Color.accentColor)
+        .tint(direction.description == "" ? .gray : Color.accentColor)
     }
 }
 
