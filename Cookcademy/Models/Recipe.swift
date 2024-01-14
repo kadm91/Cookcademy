@@ -21,6 +21,14 @@ struct Recipe: Identifiable, Equatable, Hashable {
         //&& !ingredients.isEmpty && !directions.isEmpty
     }
     
+    func index(of direction: Direction, excludingOptionalDirections: Bool) -> Int? {
+        
+        let directions = directions.filter { excludingOptionalDirections ? !$0.isOptional : true }
+        
+        let index = directions.firstIndex {$0.description == direction.description}
+        
+        return index
+    }
     
     init(mainInformation: MainInformation, ingredients: [Ingredient], directions: [Direction]) {
         self.mainInformation = mainInformation
