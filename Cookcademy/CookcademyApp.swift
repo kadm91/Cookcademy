@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct CookcademyApp: App {
     
-    @AppStorage ("mainColor")private var mainColor = Color.accentColor
+    @AppStorage ("mainColor") var mainColor = Color.accentColor
     
     @State var recipeData = RecipeData()
     

@@ -12,6 +12,7 @@ struct RecipeDetailView: View {
    @Binding var recipe: Recipe
    @State private var isPresenting = false
    @AppStorage ("mainColor")private var mainColor = Color.accentColor
+   @AppStorage ("hideOptionalSteps") private var hideOptionalSteps: Bool = false
     
     var body: some View {
         VStack {
@@ -152,11 +153,17 @@ extension RecipeDetailView {
     var directionSection: some View {
         Section {
             ForEach (directions) { direction in
-                let index =  recipe.directions.firstIndex {$0 == direction} ?? 0
-                HStack {
-                    Text("\(index + 1). ").bold()
-                    Text("\(direction.isOptional ? "(Optional) " : "")"
-                         + "\(direction.description)")
+               // let index =  recipe.directions.firstIndex {$0 == direction} ?? 0
+                
+                if hideOptionalSteps && direction.isOptional {
+                    EmptyView()
+                } else {
+                    HStack {
+                        let index = recipe.index(of: direction, excludingOptionalDirections: hideOptionalSteps) ?? 0
+                        Text("\(index + 1). ").bold()
+                        Text("\(direction.isOptional ? "(Optional) " : "")"
+                             + "\(direction.description)")
+                    }
                 }
             }
         } header: {
@@ -172,6 +179,9 @@ extension RecipeDetailView {
                
         }
     }
+    
+    
+
     
     
 }

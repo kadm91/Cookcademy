@@ -8,6 +8,9 @@
 import Foundation
 
 @Observable class RecipeData {
+    
+    
+    
     var recipes = Recipe.testRecipes
     
     var favoriteRecipes: [Recipe] {
