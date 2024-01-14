@@ -11,7 +11,7 @@ struct RecipeDetailView: View {
     
    @Binding var recipe: Recipe
    @State private var isPresenting = false
-   
+   @AppStorage ("mainColor")private var mainColor = Color.accentColor
     
     var body: some View {
         VStack {
@@ -25,8 +25,8 @@ struct RecipeDetailView: View {
                     ingredientsSection
                     directionSection
                 }
-                .listRowBackground(Color.cusumBackground)
-                .foregroundStyle(Color.customForeground)
+                //.listRowBackground(Color.cusumBackground)
+                .foregroundStyle(Color.accentColor)
                 
             }
             
@@ -43,22 +43,28 @@ struct RecipeDetailView: View {
         }
         .sheet(isPresented: $isPresenting) {
             NavigationStack {
-                ModifyRecipeView(recipe: $recipe)
-                    .toolbar {
-                        ToolbarItem (placement: .confirmationAction) {
-                            Button("Save") { isPresenting.toggle() }
-                        }
-                        
-                        ToolbarItem (placement: .cancellationAction) {
-                            Button ("Dismiss") {
-                                isPresenting.toggle()
+                
+                
+                Group {
+                    ModifyRecipeView(recipe: $recipe)
+                    
+                        .toolbar {
+                            ToolbarItem (placement: .confirmationAction) {
+                                Button("Save") { isPresenting.toggle() }
+                            }
+                            
+                            ToolbarItem (placement: .cancellationAction) {
+                                Button ("Dismiss") {
+                                    isPresenting.toggle()
+                                }
                             }
                         }
-                    }
-                    .navigationTitle("Edit Recipe")
-                    .navigationBarTitleDisplayMode(.inline)
+                        .navigationTitle("Edit Recipe")
+                        .navigationBarTitleDisplayMode(.inline)
+                }
+                .tint(mainColor)
+                .foregroundStyle(mainColor)
             }
-            
         }
         
     }
@@ -79,7 +85,7 @@ extension RecipeDetailView {
             }
                 .padding(.top)
                 .font(.subheadline)
-                .foregroundStyle(.accent)
+                .foregroundStyle(Color.accentColor)
                 
             Spacer()
         }
@@ -88,7 +94,7 @@ extension RecipeDetailView {
     var description: some View {
         HStack {
             Text(recipe.mainInformation.description)
-                .foregroundStyle(.accent)
+                .foregroundStyle(Color.accentColor)
                 .font(.subheadline)
                 .padding()
             Spacer()

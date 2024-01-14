@@ -23,11 +23,11 @@ struct CategoryView: View {
                 .font(.title2)
                 .underline()
                 .fontWeight(.heavy)
-                .foregroundStyle(.accent)
+                .foregroundStyle(Color.accentColor)
                 
         }
         .clipShape(RoundedRectangle(cornerRadius: 25.0))
-        .overlay(RoundedRectangle(cornerRadius: 25.0).strokeBorder(.customForeground, lineWidth: 2))
+        .overlay(RoundedRectangle(cornerRadius: 25.0).strokeBorder(Color.accentColor, lineWidth: 2))
         
         
     }

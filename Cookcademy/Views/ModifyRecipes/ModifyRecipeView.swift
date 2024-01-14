@@ -32,6 +32,8 @@ struct ModifyRecipeView: View {
 
 extension ModifyRecipeView {
     
+    
+    
     var selectionView: some View {
         Picker("Selection", selection: $selection) {
             ForEach(Selection.allCases) {
@@ -52,12 +54,14 @@ extension ModifyRecipeView {
             
         case .main:
             ModifyMainInformationView(mainInformation: $recipe.mainInformation)
+               
             
         case .ingredients:
             ModifyComponentsView<Ingredient, ModifyIngredientView> (components: $recipe.ingredients)
-            
+               
         case .directions:
             ModifyComponentsView<Direction, ModifyDirectionView>(components: $recipe.directions)
+                
         }
         
     }

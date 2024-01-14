@@ -9,23 +9,21 @@ import SwiftUI
 
 struct SettingsView: View {
   @State private var hideOptionalSteps: Bool = false
-    @State private var listBackgroundColor = Color.cusumBackground
-    @State private var listTextColor = Color.accentColor
+    @AppStorage ("mainColor")private var mainColor = Color.accentColor
   
   var body: some View {
     NavigationView {
       Form {
-        ColorPicker("List BackgroundColor", selection: $listBackgroundColor)
+          ColorPicker("Accent Color", selection: $mainColor)
           .padding()
-          .listRowBackground(listBackgroundColor)
-        ColorPicker("Text Color", selection: $listTextColor)
-          .padding()
-          .listRowBackground(listBackgroundColor)
+          //.listRowBackground(Color.cusumBackground)
+    
         Toggle("Hide Optional Steps", isOn: $hideOptionalSteps)
           .padding()
-          .listRowBackground(listBackgroundColor)
+          //.listRowBackground(Color.cusumBackground)
+          .tint(mainColor)
       }
-      .foregroundColor(listTextColor)
+      .foregroundColor(mainColor)
       .navigationTitle("Settings")
     }
   }

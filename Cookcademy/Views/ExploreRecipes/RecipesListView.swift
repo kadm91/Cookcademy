@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RecipesListView: View {
+    @AppStorage ("mainColor")private var mainColor = Color.accentColor
     
     @Environment(RecipeData.self) var recipeDataVM
     
@@ -35,7 +36,7 @@ struct RecipesListView: View {
                     
                         
                 }
-                .listRowBackground(Color.cusumBackground)
+               // .listRowBackground(Color.cusumBackground)
             }
         }
         .toolbar {
@@ -44,7 +45,7 @@ struct RecipesListView: View {
                     isPresenting.toggle()
                     newRecipe = Recipe()
                 }
-                .tint(Color.customForeground)
+                .tint(mainColor)
             }
             
         }
@@ -78,7 +79,7 @@ struct RecipesListView: View {
                     .navigationBarTitleDisplayMode(.inline)
             }
         }
-        .foregroundStyle(Color.customForeground)
+        .foregroundStyle(mainColor)
         .navigationDestination(for: Recipe.self) { recipe in
             RecipeDetailView(recipe: binding(for: recipe) )
         }
