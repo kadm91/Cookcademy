@@ -19,8 +19,6 @@ import SwiftUI
 
 struct ModifyComponentsView<Component: RecipeComponent, DestinationView: ModifyComponentView>: View where DestinationView.Component == Component, DestinationView.Component: Hashable  {
     
-
-    
     @Binding var components: [Component]
     @State private var newComponent = Component()
     @State private var editMode: EditMode = .inactive
@@ -160,6 +158,7 @@ extension ModifyComponentsView {
            
             .navigationDestination(for: Component.self) { component in
                 DestinationView(component: binding(for: component)) { _ in
+                 
                     return
                 }
                 .navigationTitle("Edit \(labelComponent.capitalized)")

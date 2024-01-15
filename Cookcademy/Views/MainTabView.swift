@@ -25,6 +25,9 @@ struct MainTabView: View {
           SettingsView()
               .tabItem { Label("Settings", systemImage: "gear")  }
       }
+      .onAppear {
+          RecipeDataMV.loadRecipes()
+      }
         
     }
     

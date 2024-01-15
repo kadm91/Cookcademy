@@ -9,6 +9,8 @@ import SwiftUI
 
 struct RecipeDetailView: View {
     
+    @Environment (RecipeData.self) var recipeDataVM
+    
    @Binding var recipe: Recipe
    @State private var isPresenting = false
    @AppStorage ("mainColor")private var mainColor = Color.accentColor
@@ -51,7 +53,12 @@ struct RecipeDetailView: View {
                     
                         .toolbar {
                             ToolbarItem (placement: .confirmationAction) {
-                                Button("Save") { isPresenting.toggle() }
+                                Button("Save") { isPresenting.toggle()
+                                            recipeDataVM.saveRecipes()
+                                }
+                                    
+                                       
+                                    
                             }
                             
                             ToolbarItem (placement: .cancellationAction) {
@@ -67,6 +74,7 @@ struct RecipeDetailView: View {
                 .foregroundStyle(mainColor)
             }
         }
+        
         
     }
 }
