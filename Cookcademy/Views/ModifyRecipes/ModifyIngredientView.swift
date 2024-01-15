@@ -13,6 +13,8 @@ struct ModifyIngredientView: ModifyComponentView {
     
     @Environment (\.dismiss) var dismiss
     
+    
+    
     @Binding var ingredient: Ingredient
     let createAction: ((Ingredient) -> Void)
     

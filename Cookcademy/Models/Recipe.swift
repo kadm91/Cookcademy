@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct Recipe: Identifiable, Equatable, Hashable {
+struct Recipe: Identifiable, Equatable, Hashable, Codable {
     
-    let id = UUID()
+    var id = UUID()
     var mainInformation: MainInformation
     var ingredients: [Ingredient]
     var directions: [Direction]
@@ -52,8 +52,8 @@ struct Recipe: Identifiable, Equatable, Hashable {
     
 }
 
-struct MainInformation: Identifiable, Equatable, Hashable {
-    let id = UUID()
+struct MainInformation: Identifiable, Equatable, Hashable, Codable {
+    var id = UUID()
     var name: String
     var description: String
     var author: String
@@ -64,7 +64,7 @@ struct MainInformation: Identifiable, Equatable, Hashable {
         //&& !description.isEmpty && !author.isEmpty
     }
     
-    enum Category: String, CaseIterable, Hashable, Identifiable {
+    enum Category: String, CaseIterable, Hashable, Identifiable, Codable {
         case breakfast = "Breakfast"
         case lunch = "Lunch"
         case dinner = "Dinner"
@@ -74,10 +74,10 @@ struct MainInformation: Identifiable, Equatable, Hashable {
     }
 }
 
-struct Ingredient: Identifiable, Equatable, Hashable, RecipeComponent {
+struct Ingredient: Identifiable, Equatable, Hashable, RecipeComponent, Codable {
     
     
-    let id = UUID()
+    var id = UUID()
     var name: String
     var quantity: Double
     var unit: Unit
@@ -98,7 +98,7 @@ struct Ingredient: Identifiable, Equatable, Hashable, RecipeComponent {
     }
         
         
-        enum Unit: String, CaseIterable, Identifiable {
+        enum Unit: String, CaseIterable, Identifiable, Codable {
             case oz = "Ounces"
             case g = "Grams"
             case cups = "Cups"
@@ -126,9 +126,9 @@ struct Ingredient: Identifiable, Equatable, Hashable, RecipeComponent {
     }
 
 
-struct Direction: Identifiable, Equatable, Hashable, RecipeComponent {
+struct Direction: Identifiable, Equatable, Hashable, RecipeComponent, Codable {
     
-    let id = UUID()
+    var id = UUID()
     var description: String
     var isOptional: Bool
     

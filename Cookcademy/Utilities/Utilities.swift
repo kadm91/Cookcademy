@@ -25,7 +25,7 @@ struct ComponentSaveBtn: View {
             Button {
                 action()
             } label: {
-                 Text("Save")
+                 Text("Done")
                     .font(.title3)
                     .frame(maxWidth: .infinity)
                     .frame(maxHeight: .infinity)
